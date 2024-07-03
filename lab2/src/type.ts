@@ -1,4 +1,4 @@
-export interface Event{
+export interface Event {
     id: number
     category: string
     title: string
@@ -8,4 +8,12 @@ export interface Event{
     time: string
     petsAllowed: boolean
     organizer: string
-}
+  }
+  export interface Student {
+    id: number
+    studentId: string
+    name: string
+    gpa: number
+    image: string
+    description: string
+  }

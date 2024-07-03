@@ -10,6 +10,7 @@ import EventCard from './components/EventCard.vue'
         <nav>
           <RouterLink to="/">Event</RouterLink> |
           <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/student">Student</RouterLink>
         </nav>
       </div>
     </header>
