@@ -13,6 +13,7 @@ import EventCard from './components/EventCard.vue'
         </nav>
       </div>
     </header>
+  
 
     <RouterView />
   </div>
