@@ -4,9 +4,10 @@ import type { Ref } from 'vue'
 import type {Event} from '@/type'
 import EventService from '@/services/EventService'
 const event = ref <Event | null> (null)
-const id: Ref<number> = ref(123)
-
-    EventService.getEventById(id.value)
+const props = defineProps({
+    id: String
+})
+EventService.getEventById(Number(props.id))
     .then((response) => {
         event.value = response.data
     }).catch(error => {
