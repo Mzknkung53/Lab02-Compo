@@ -12,6 +12,7 @@ export interface Event {
   export interface Student {
     id: number
     studentId: string
+    surname: string
     name: string
     gpa: number
     image: string

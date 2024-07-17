@@ -9,8 +9,8 @@ import EventCard from './components/EventCard.vue'
       <div class="wrapper">
         <nav>
           <RouterLink :to="{name:'event-list-view'}">Event</RouterLink> |
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/student">Student</RouterLink>
+          <RouterLink :to="{name:'about'}">About</RouterLink>
+          <RouterLink :to="{name:'student'}">Student</RouterLink>
         </nav>
       </div>
     </header>
