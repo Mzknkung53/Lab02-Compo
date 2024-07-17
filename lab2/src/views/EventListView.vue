@@ -1,29 +1,35 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import type {Event} from '@/type'
-import { ref,watchEffect } from 'vue';
+import type { Event } from '@/type'
+import { ref, onMounted, watchEffect, computed } from 'vue'
 import EventService from '@/services/EventService'
-import type { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios'
 
 const events = ref<Event[]>([])
-
-  const props = defineProps({
-    page: {
-      type: Number,
-      required: true
-    }
-  })
-
+const totalEvent = ref<number>(0)
+const props = defineProps({
+  page: {
+    type: Number,
+    required: true
+  }
+})
+onMounted(() => {
   watchEffect(() => {
-  EventService.getEvents(2, props.page)
-    .then((response: AxiosResponse<Event[]>) => {
-      events.value = response.data
-    })
-    .catch((error) => {
-      console.error('There was an error!', error)
-    })
+    EventService.getEvents(2, props.page)
+      .then((response: AxiosResponse<Event[]>) => {
+        events.value = response.data
+        totalEvent.value = response.headers['x-total-count']
+      })
+      .catch((error) => {
+        console.error('There was an error!', error)
+      })
   })
-
+})
+const hasNextPage = computed(() => {
+  // calculate total page
+  const totalPages = Math.ceil(totalEvent.value / 2)
+  return props.page.valueOf() < totalPages
+})
 </script>
 
 <template>
@@ -31,11 +37,25 @@ const events = ref<Event[]>([])
   <!--new element-->
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event"></EventCard>
-    <!-- <EventInfo v-for="event in events" :key="event.id" :event="event"></EventInfo> -->
-    <RouterLink :to="{ name: 'event-list-view', query: { page: page - 1} }" rel="prev" v-if="page!= 1">
-    Prev Page</RouterLink>
-    <RouterLink :to="{ name: 'event-list-view', query: { page: page + 1} }" rel="next" v-if="page == 1">
-    Next Page</RouterLink>
+    <EventInfo v-for="event in events" :key="event.id" :event="event"></EventInfo>
+    <div class="pagination">
+      <RouterLink
+        :to="{ name: 'event-list-view', query: { page: page - 1 } }"
+        rel="prev"
+        v-if="page != 1"
+        id="page-prev"
+      >
+        Prev Page</RouterLink
+      >
+      <RouterLink
+        :to="{ name: 'event-list-view', query: { page: page + 1 } }"
+        rel="next"
+        v-if="hasNextPage"
+        id="page-next"
+      >
+        Next Page</RouterLink
+      >
+    </div>
   </div>
 </template>
 
@@ -44,5 +64,20 @@ const events = ref<Event[]>([])
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.pagination {
+  display: flex;
+  width: 290px;
+}
+.pagination a {
+  flex: 1;
+  text-decoration: none;
+  color: #2c3e50;
+}
+#page-prev {
+  text-align: left;
+}
+#page-next {
+  text-align: right;
 }
 </style>
