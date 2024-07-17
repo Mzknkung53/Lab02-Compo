@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import type { Event } from '@/type'
-import { ref, onMounted } from 'vue'
+import type {Event} from '@/type'
+import { ref,onMounted } from 'vue';
 import EventService from '@/services/EventService'
-import type { Axios, AxiosResponse } from 'axios'
+import type { AxiosResponse } from 'axios';
 
 const events = ref<Event[]>([])
 
@@ -22,6 +22,7 @@ onMounted(() => {
       console.error('There was an error!', error)
     })
 })
+
 </script>
 
 <template>
@@ -30,6 +31,10 @@ onMounted(() => {
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event"></EventCard>
     <EventInfo v-for="event in events" :key="event.id" :event="event"></EventInfo>
+    <RouterLink :to="{ name: 'event-list', query: { page: page - 1} }" rel="prev" v-if="page!= 1">
+    Prev Page</RouterLink>
+    <RouterLink :to="{ name: 'event-list', query: { page: page + 1} }" rel="next" v-if="page == 1">
+    Next Page</RouterLink>
   </div>
 </template>
 
