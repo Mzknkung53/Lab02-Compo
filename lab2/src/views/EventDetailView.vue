@@ -1,9 +1,9 @@
 <script setup lang ="ts">
 import {ref} from 'vue'
 import type { Ref } from 'vue'
-import type {EventItem} from '@/type'
+import type {Event} from '@/type'
 import EventService from '@/services/EventService'
-const event = ref <EventItem | null> (null)
+const event = ref <Event | null> (null)
 const id: Ref<number> = ref(123)
 
     EventService.getEventById(id.value)
