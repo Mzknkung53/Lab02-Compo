@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Event from '@/types/Event'
+import type {Event} from '@/type'
 defineProps<{
   event: Event
 }>()
@@ -18,7 +18,7 @@ defineProps<{
 </script>
 
 <template>
-  <RounterLink :to="{name: 'event-detail'}">
+  <RounterLink :to="{name: 'event-detail',params:{id: event?.id}}">
   <div class="event-class">
     <div class="event-card">
       <h2>{{ event?.title }}</h2>
