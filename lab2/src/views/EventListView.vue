@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import EventCard from '@/components/EventCard.vue'
-import Event from '@/types/Event'
-import { ref,onMounted } from 'vue';
+import type { Event } from '@/type'
+import { ref, onMounted } from 'vue'
 import EventService from '@/services/EventService'
+import type { Axios, AxiosResponse } from 'axios'
 
-const events = ref<Event[]>(null)
+const events = ref<Event[]>([])
 
 onMounted(() => {
-  EventService.getEvents()
-    .then((response) => {
+  const props = defineProps({
+    page: {
+      type: Number,
+      required: true
+    }
+  })
+  EventService.getEvents(2, props.page)
+    .then((response: AxiosResponse<Event[]>) => {
       events.value = response.data
     })
     .catch((error) => {
       console.error('There was an error!', error)
     })
 })
-
 </script>
 
 <template>
