@@ -3,7 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '@/views/EventListView.vue'
 import AboutView from '@/views/AboutView.vue'
 import StudentListView from '@/views/StudentListView.vue'
-import EventDetailView from '@/views/EventDetailView.vue'
+import EventDetailView from '@/views/event/EventDetailView.vue'
+import EventEditView from '@/views/event/EventEditView.vue'
+import EventRegisterView from '@/views/event/EventRegisterView.vue'
 
 export function createAppRouter(pageLimit: (number | null)[]) {
   return createRouter({
@@ -33,6 +35,18 @@ export function createAppRouter(pageLimit: (number | null)[]) {
         name: 'event-detail',
         component: EventDetailView,
         props: true
+      },
+      {
+        path: '/event/:id/edit',
+        name: 'event-edit',
+        props: true,
+        component: EventEditView
+      },
+      {
+        path: '/event/:id/register',
+        name: 'event-register',
+        props: true,
+        component: EventRegisterView
       }
     ]
   })
