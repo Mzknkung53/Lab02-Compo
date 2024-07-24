@@ -4,6 +4,7 @@ import type { Event } from '@/type'
 import { ref, onMounted, watchEffect, computed } from 'vue'
 import EventService from '@/services/EventService'
 import type { AxiosResponse } from 'axios'
+import nProgress from 'nprogress'
 
 const events = ref<Event[]>([])
 const totalEvent = ref<number>(0)
@@ -19,6 +20,7 @@ const props = defineProps({
 })
 onMounted(() => {
   watchEffect(() => {
+    nProgress.start()
     EventService.getEvents(props.pageLimit, props.page)
       .then((response: AxiosResponse<Event[]>) => {
         events.value = response.data
@@ -26,6 +28,9 @@ onMounted(() => {
       })
       .catch((error) => {
         console.error('There was an error!', error)
+      })
+      .finally(() => {
+        nProgress.done()
       })
   })
 })
@@ -64,5 +69,24 @@ const hasNextPage = computed(() => {
 </template>
 
 <style scoped>
-.events { display: flex; flex-direction: column; align-items: center; } .pagination { display: flex; width: 290px; } .pagination a { flex: 1; text-decoration: none; color: #2c3e50; } #page-prev { text-align: left; } #page-next { text-align: right; }
+.events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pagination {
+  display: flex;
+  width: 290px;
+}
+.pagination a {
+  flex: 1;
+  text-decoration: none;
+  color: #2c3e50;
+}
+#page-prev {
+  text-align: left;
+}
+#page-next {
+  text-align: right;
+}
 </style>
