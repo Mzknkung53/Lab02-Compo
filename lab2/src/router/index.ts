@@ -52,26 +52,26 @@ export function createAppRouter(pageLimit: (number | null)[]) {
       
       {
         path: '/event/:id',
-        name: 'event-layout',
+        name: 'event-layout-view',
         component: EventLayoutView,
         props: true,
         children: [
           {
             path: '',
-            name: 'event-detail',
+            name: 'event-detail-view',
             component: EventDetailView,
             props:true
           },
           {
             path: 'edit',
-            name: 'event-edit',
+            name: 'event-edit-view',
             props:true,
             component: EventEditView
             
           },
           {
             path: 'register',
-            name: 'event-register',
+            name: 'event-register-view',
             props:true,
             component: EventRegisterView
           }
