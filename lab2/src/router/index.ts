@@ -10,6 +10,7 @@ import EventLayoutView from '@/views/event/EventLayoutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from'nprogress'
+import EventService from '@/services/EventService'
 
 
 export function createAppRouter(pageLimit: (number | null)[]) {
@@ -58,6 +59,19 @@ export function createAppRouter(pageLimit: (number | null)[]) {
         component: EventLayoutView,
         props: true,
         beforeEnter: (to) =>{
+          const id = parseInt(to.params.id as string)
+          return EventService.getEventById(id).then((response)=>{
+
+          }).catch((error)=>{
+            if (error.response && error.response.status ===404){
+              return{
+                name: '404-resource-view',
+                params:{resource: 'event'}
+              }
+            } else{
+              return{name:'network-error-view'}
+            }
+          })
 
         },
         children: [
