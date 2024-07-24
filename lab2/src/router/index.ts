@@ -57,6 +57,9 @@ export function createAppRouter(pageLimit: (number | null)[]) {
         name: 'event-layout-view',
         component: EventLayoutView,
         props: true,
+        beforeEnter: (to) =>{
+
+        },
         children: [
           {
             path: '',
