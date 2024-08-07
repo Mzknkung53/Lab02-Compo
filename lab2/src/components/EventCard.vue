@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type {Event} from '@/type'
+import type { Event } from '@/type'
 defineProps<{
   event: Event
 }>()
@@ -18,27 +17,21 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink class = "event-link" :to="{name: 'event-detail-view',params:{id: event?.id}}">
-  <div class="event-class">
-    <div class="event-card hover:scale-105 hover:shadow-sp">
-      <h2>{{ event?.title }}</h2>
-      <span>@{{ event?.time }} on {{ event?.date }}</span>
+  <RouterLink class="event-link" :to="{ name: 'event-detail-view', params: { id: event?.id } }">
+    <div class="event-class">
+      <div
+        class="cursor-pointer border border-gray-600 p-4 w-64 mb-6 hover:scale-105 hover:shadow-sp"
+      >
+        <h2>{{ event?.title }}</h2>
+        <span>@{{ event?.time }} on {{ event?.date }}</span>
+      </div>
     </div>
-  </div>
   </RouterLink>
 </template>
 
 <style scoped>
-.event-card {
-  padding: 20px;
-  width: 250px;
-  cursor: pointer;
-  border: 1px solid #39495c;
-  margin-bottom: 18px;
-}
-
-.event-link{
-  color: #2c3e50;
+.event-link {
+  color: #0d3358;
   text-decoration: none;
 }
 </style>
