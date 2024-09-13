@@ -12,14 +12,11 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  pageLimit: {
-    type: Array<number>,
-    required: true
-  }
+
 })
 onMounted(() => {
   watchEffect(() => {
-    EventService.getEvents(props.pageLimit, props.page)
+    EventService.getEvents(3, props.page)
       .then((response: AxiosResponse<Event[]>) => {
         events.value = response.data
         totalEvent.value = response.headers['x-total-count']
@@ -31,7 +28,8 @@ onMounted(() => {
 })
 const hasNextPage = computed(() => {
   // calculate total page
-  const totalPages = props.pageLimit.length - 1
+  const totalPages = 3 - 1
+  console.log(totalPages)
   return props.page.valueOf() < totalPages
 })
 </script>
@@ -41,7 +39,6 @@ const hasNextPage = computed(() => {
   <!--new element-->
   <div class="flex flex-col items-center">
     <EventCard v-for="event in events" :key="event.id" :event="event"></EventCard>
-    <EventInfo v-for="event in events" :key="event.id" :event="event"></EventInfo>
     <div class="flex w-[290px]">
       <RouterLink
         :to="{ name: 'event-list-view', query: { page: page - 1 } }"

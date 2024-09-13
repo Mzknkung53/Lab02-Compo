@@ -2,7 +2,7 @@ import axios, { type AxiosResponse } from 'axios'
 import type { Event } from '@/type'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080/',
+  baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -11,30 +11,15 @@ const apiClient = axios.create({
 })
 
 export default {
-  getEvents(pageLimit: number[], page: number): Promise<AxiosResponse<Event[]>> {
-    // Validate page number
-    if (page <= 0 || page > pageLimit.length) {
-      throw new Error(`Invalid page number ${page}.`)
-    }
+  getEvents(pageLimit: number, page: number): Promise<AxiosResponse<Event[]>> {
 
-    // Calculate start index based on valid page and pageLimit
-    let startIndex = 0
-    for (let i = 1; i < page; i++) {
-      // Start loop from 1 to skip index 0
-      startIndex += pageLimit[i]
-    }
-    const limit = pageLimit[page]
-
-    // Prepare query parameters for pagination
-    const params = {
-      _start: startIndex,
-      _limit: limit
-    }
-
-    return apiClient.get<Event[]>('/events', { params })
+    return apiClient.get<Event[]>('/events?_page='+page+'&_limit='+pageLimit)
   },
 
   getEventById(id: number): Promise<AxiosResponse<Event>> {
     return apiClient.get<Event>(`/events/${id}`)
+  },
+  saveEvent(event: Event){
+    return apiClient.post('/events', event)
   }
-}
+  }
