@@ -9,7 +9,7 @@ import EventRegisterView from '@/views/event/EventRegisterView.vue'
 import EventEditView from '@/views/event/EventEditView.vue'
 import EventLayoutView from '@/views/event/EventLayoutView.vue'
 import AddEventView from '@/views/event/EventFormView.vue'
-import AddOrganizerView from '@/views/OrganizerView.vue'
+import AddOrganizerView from '@/views/event/OrganizerFormView.vue'
 
 import StudentListView from '@/views/StudentListView.vue'
 import nProgress from 'nprogress'
