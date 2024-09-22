@@ -12,7 +12,7 @@ const organizer = ref<Organizer>({
 });
 
 const router = useRouter();
-const store = useMessageStore()
+const store = useMessageStore();
 
 function saveOrganizer() {
   OrganizerService.saveOrganizer(organizer.value)

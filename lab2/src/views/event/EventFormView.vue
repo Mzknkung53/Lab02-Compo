@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import EventService from '@/services/EventService';
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message';
+import BaseInput from '@/components/BaseInput.vue';
 
 const event = ref<Event>({
   id: 0,
@@ -14,7 +15,10 @@ const event = ref<Event>({
   date: '',
   time: '',
   petsAllowed: false,
-  organizer: '',
+  organizer: {
+  id: 0,
+  name: ''
+}
 });
 
 const router = useRouter();
@@ -40,14 +44,9 @@ function saveEvent() {
     <div>
       <h1>Create an Event</h1>
       <form @submit.prevent="saveEvent">
-        <label>Category</label>
-        <input v-model="event.category" type="text" placeholder="Category"
-        class="field"/>
-        
+        <BaseInput v-model="event.category" type="text" label="Category" />
         <h3>Name & describe your event</h3>
-        <label>Title</label>
-        <input v-model="event.title" type="text" placeholder="Title" class="field"/>
-  
+        <BaseInput v-model="event.title" type="text" label="Title" />
         <label>Description</label>
         <input v-model="event.description" type="text" placeholder="Description" 
         class="field"/> 
