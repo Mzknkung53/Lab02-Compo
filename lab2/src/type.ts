@@ -7,14 +7,17 @@ export interface Event {
   date: string
   time: string
   petsAllowed: boolean
-  organizer: string
+  organizer: Organizer
+  participant: Participant[]
 }
-
 export interface Organizer {
-  id: number;
-  name: string;  
-  organizationName: string;
-  address: string;
+  id: number
+  name: string
+}
+export interface Participant {
+  id: number
+  name: string
+  telNo: string
 }
 export interface Student {
   id: number
@@ -33,12 +36,21 @@ export interface EventState {
   event: Event | null
 }
 
-export interface Organizer {
-  id: number
-  organizationName: string
-  address: string
-}
-
 export interface OrganizerState {
   organizer: Organizer | null
+}
+
+export interface ParticipantState {
+  participant: Participant | null
+}
+
+export interface AuctionItem {
+  id: number
+  title: string
+  description: string
+  type: string
+}
+
+export interface AuctionItemState {
+  auctionItem: AuctionItem | null
 }
