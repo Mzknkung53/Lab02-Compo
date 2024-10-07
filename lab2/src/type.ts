@@ -13,8 +13,9 @@ export interface Event {
 }
 export interface Organizer {
   id: number
-  organizationName: string
+  name: string
   address: string
+  imageUrl: string[]
 }
 export interface Participant {
   id: number

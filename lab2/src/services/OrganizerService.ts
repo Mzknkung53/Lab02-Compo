@@ -1,5 +1,5 @@
 import {type Organizer } from './../type';
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -17,5 +17,8 @@ export default {
     // Save a new event
   saveOrganizer(organizer: Organizer) {
     return apiClient.post('/organizers', organizer)
+  },
+  getOrganizerById(id: number): Promise<AxiosResponse<Organizer>> {
+    return apiClient.get<Organizer>(`/organizers/${id}`)
   },
 }

@@ -3,7 +3,7 @@ import EventListView from '@/views/EventListView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import OrganizerView from '@/views/OrganizerView.vue'
-
+import OrganizerDetail from '@/views/OrganizerDetail.vue'
 import EventDetailView from '@/views/event/EventDetailView.vue'
 import EventRegisterView from '@/views/event/EventRegisterView.vue'
 import EventEditView from '@/views/event/EventEditView.vue'
@@ -105,7 +105,14 @@ const router = createRouter({
       path: '/Student',
       name: 'student',
       component: StudentListView
+    },
+    {
+      path: '/organizer/:id',
+      name: 'organizer-detail-view',
+      component: OrganizerDetail, 
+      props: true
     }
+    
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

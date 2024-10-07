@@ -20,8 +20,9 @@ const event = ref<Event>({
   petsAllowed: false,
   organizer: {
     id: 0,
-    organizationName: '',
-    address: ''
+    name: '',
+    address: '',
+    imageUrl: []
   },
   participant: [],
   images: []
