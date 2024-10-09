@@ -10,11 +10,13 @@ import EventEditView from '@/views/event/EventEditView.vue'
 import EventLayoutView from '@/views/event/EventLayoutView.vue'
 import AddEventView from '@/views/event/EventFormView.vue'
 import AddOrganizerView from '@/views/event/OrganizerFormView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 import StudentListView from '@/views/StudentListView.vue'
 import nProgress from 'nprogress'
 import { useEventStore } from '@/stores/event'
 import EventService from '@/services/EventService'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +27,11 @@ const router = createRouter({
       component: EventListView,
       props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') })
     },
+      {
+        path: '/login',
+        name: 'Login',
+        component: LoginView
+      },
       {
         path: '/event/:id',
         name: 'event-layout-view',
@@ -111,7 +118,8 @@ const router = createRouter({
       name: 'organizer-detail-view',
       component: OrganizerDetail, 
       props: true
-    }
+    },
+    
     
   ],
   scrollBehavior(to, from, savedPosition) {
