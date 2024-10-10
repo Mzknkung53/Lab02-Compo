@@ -58,3 +58,10 @@ export interface AuctionItem {
 export interface AuctionItemState {
   auctionItem: AuctionItem | null
 }
+
+export interface EventOrganizer {
+  id: number
+  name: string
+  imageUrl: string[]
+  roles: string[]
+}

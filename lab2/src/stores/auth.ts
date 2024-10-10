@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
-import type { Organizer } from '@/type'
+import { type Organizer } from '@/type';
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -23,7 +23,6 @@ export const useAuthStore = defineStore('auth', {
     isAdmin(): boolean {
       return this.user?.roles.includes('ROLE_ADMIN') || false
     }
-
   },
   actions: {
     login(email: string, password: string) {
@@ -34,19 +33,21 @@ export const useAuthStore = defineStore('auth', {
         })
         .then((response) => {
           this.token = response.data.access_token;
+          this.user = response.data.user;
+          console.log(response.data)
           localStorage.setItem('access_token', this.token as string)
           localStorage.setItem('user', JSON.stringify(this.user))
           return response;
         })
     },
     logout() {
-      console.log('logout');
-      this.token = null;
-      this.user = null;
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user');
+      console.log('logout')
+      this.token = null
+      this.user = null
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('user')
     },
-    reload(token: string, user: EventOrganizer) {
+    reload(token: string, user: Organizer) {
       this.token = token
       this.user = user
     }

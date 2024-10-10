@@ -13,6 +13,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 const token = localStorage.getItem('token')
 const user = localStorage.getItem('user')
+console.log(authStore.isAdmin)
 if (token && user) {
  authStore.reload(token,JSON.parse(user))
 }else{
@@ -37,7 +38,7 @@ function logout() {
           <router-link class="font-bold text-gray-700" :to="{ name: 'event-list-view' }" exact-active-class="text-green-500">Event</router-link> |
           <router-link class="font-bold text-gray-700" :to="{ name: 'about' }" exact-active-class="text-green-500">About</router-link> |
           <span v-if="authStore.isAdmin">
-            <router-link class="font-bold text-gray-700" :to="{ name: 'add-event' }" exact-active-class="text-green-500">New Event</router-link>
+            <router-link class="font-bold text-gray-700" :to="{ name: 'add-event' }" exact-active-class="text-green-500">New Event</router-link> |
           </span>
           <router-link class="font-bold text-gray-700" :to="{ name: 'organizer' }" exact-active-class="text-green-500">Organizer</router-link> |
           <router-link class="font-bold text-gray-700" :to="{ name: 'add-organizer' }" exact-active-class="text-green-500">New Organizer</router-link> |
