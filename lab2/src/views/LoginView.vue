@@ -15,14 +15,21 @@ const { errors, handleSubmit } = useForm({
     password: ''
   }
 })
+import { useRouter } from 'vue-router'
+import { useMessageStore } from '@/stores/message';
+const messageStore = useMessageStore()
+const router = useRouter()
 const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
 const onSubmit = handleSubmit((values) => {
   authStore.login(values.email, values.password)
   .then(() => {
-    console.log('login sucess')
+    router.push({ name:'event-list-view' })
   }).catch((err) => {
-    console.log('error',err)
+    messageStore.updateMessage('Cound not login')
+    setTimeout(() => {
+      messageStore.resetMessage()
+    }, 3000)
   })
 })
 </script>
