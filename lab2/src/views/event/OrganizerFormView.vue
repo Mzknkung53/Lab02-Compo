@@ -11,6 +11,7 @@ const organizer = ref<Organizer>({
   name: '',
   address: '',
   imageUrl: [],
+  roles: []
 });
 
 let selectedFile = ref<File | null>(null);

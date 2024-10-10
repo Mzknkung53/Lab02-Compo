@@ -16,6 +16,7 @@ export interface Organizer {
   name: string
   address: string
   imageUrl: string[]
+  roles: string[]
 }
 export interface Participant {
   id: number

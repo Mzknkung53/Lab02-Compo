@@ -36,7 +36,9 @@ function logout() {
         <nav class="py-6">
           <router-link class="font-bold text-gray-700" :to="{ name: 'event-list-view' }" exact-active-class="text-green-500">Event</router-link> |
           <router-link class="font-bold text-gray-700" :to="{ name: 'about' }" exact-active-class="text-green-500">About</router-link> |
-          <router-link class="font-bold text-gray-700" :to="{ name: 'add-event' }" exact-active-class="text-green-500">New Event</router-link> |
+          <span v-if="authStore.isAdmin">
+            <router-link class="font-bold text-gray-700" :to="{ name: 'add-event' }" exact-active-class="text-green-500">New Event</router-link>
+          </span>
           <router-link class="font-bold text-gray-700" :to="{ name: 'organizer' }" exact-active-class="text-green-500">Organizer</router-link> |
           <router-link class="font-bold text-gray-700" :to="{ name: 'add-organizer' }" exact-active-class="text-green-500">New Organizer</router-link> |
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'student' }">Student</RouterLink>
@@ -81,6 +83,7 @@ function logout() {
     <RouterView />
   </div>
 </template>
+
 
 <style>
 h2 {
